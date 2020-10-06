@@ -1,6 +1,6 @@
 # estrategia_de_ventas
 
-Análisis de ventas a partir de la clasificación de productos por de acuerdo a tres factores:
+Análisis de ventas a partir de la clasificación de productos de acuerdo a tres factores:
 
 -Calificación puesta por el cliente
 
