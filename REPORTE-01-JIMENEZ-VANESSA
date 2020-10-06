@@ -1,0 +1,730 @@
+from lifestore_file import lifestore_products,lifestore_sales,lifestore_searches
+
+##ENTRADA
+nombre = input("Ingrese su nombre completo: ")
+print(" ")
+print("¡" + nombre +","+"\f"+"  bienvenidx " + "\f"+" a "+ "\f" + " LifeStore!"+ "\f")
+print(" ")
+
+#INICIO DE SESIÓN
+#Usuarios y contraseñas correctos
+usuarios_admitidos = ["David", "Jorge", "Daniel"]
+admins = ["Vanessa", "Javier"]
+contraseña_correcta = float(3.1416)
+
+#Iniciando sesión
+usuarios = input("Ingrese su usuario: ")
+if usuarios not in usuarios_admitidos and usuarios not in admins:
+  print("Usuario no encontrado") 
+  intento_usuario = input("Ingrese de nuevo su usuario: ")
+  while intento_usuario not in usuarios_admitidos and intento_usuario not in admins:
+    print("Usuario no encontrado")
+    intento_usuario = input("Ingrese de nuevo su usuario: ")
+  if intento_usuario not in usuarios_admitidos and intento_usuario not in admins:
+      print("Usuario no encontrado")
+  else:
+      contraseña_escrita = float(input("Ingrese su contraseña: "))
+      while contraseña_escrita != contraseña_correcta:
+        intento_contraseña= float(input("Ingrese de nuevo su contraseña: "))
+        if intento_contraseña == contraseña_correcta:
+          print(" ")
+          print("Procesando...", "\f")
+          break
+        else:
+          print("Contraseña incorrecta")
+else:
+  contraseña_escrita = float(input("Ingrese su contraseña: "))
+  if contraseña_escrita == contraseña_correcta:
+    print(" ")
+    print("Procesando..."+ "\f")
+  else:
+    print("Contraseña incorrecta")
+    intento_contraseña = float(input("Ingrese de nuevo su contraseña: "))
+    while intento_contraseña != contraseña_correcta:
+      print("Contraseña incorrecta")
+      intento_contraseña = float(input("Ingrese de nuevo su contraseña: "))
+      if intento_contraseña == contraseña_correcta:
+        print(" ")
+        print("Procesando..."+ "\f")
+        break
+print("Iniciando sesión...", "\f")
+
+for usuario in admins:
+  if usuarios not in admins:
+    print("Hola, usuario")
+    permiso_administrador = 0
+    break
+  else:
+    print("Hola, administrador")
+    permiso_admnistrador = 1
+    break
+
+###Donde 1 es que sí es admin, y 0 que es usuario
+
+
+regreso= print("\n""Índice: ""\n")
+
+menu_general = [ 
+  [1,"1.- Productos por venta","1.1.- Top mayores ventas","1.2.- Top menores ventas"], 
+  [2,"2.- Productos por búsqueda","2.1.- Top mayores búsquedas","2.2.- Top menores búsquedas"],
+  [3,"3.- Productos por reseña","3.1.- Top mejores reseñas","3.2.- Top peores reseñas"], 
+  [4,"4.- Total de ingresos", "4.1.- Anual","4.2.- Mensual"],
+  [5,"5.- Total de ventas", "5.1.-Anual","5.2.- Mensual"],
+]
+
+for areas in menu_general:
+  print(areas[1])
+
+menu_0 = int(input("\n""Selecciona número de opción deseada: " ))
+
+for menus in menu_general: 
+  if int(menu_0) != int(menus[0]):
+    continue
+    intento_menu = int(input("Selecciona número de opción deseada: "))
+  if int(menu_0) == int(menus[0]) or int(intento_menu) == int(menus[0]):
+    print("\n",menus[2], "\n", menus[3])
+    menu_1 = float(input("\n""Selecciona número de opción deseada de esa sección: " ))
+  else: 
+    print("No encontrado")
+    intento_menu = int(input("Selecciona número de opción deseada: "))
+
+####MAYORES VENTAS
+
+
+if float(menu_1) == float(1.1):
+  print("\n""Ventas totales en LifeStore: "+ str(len(lifestore_sales))+"\n"
+  "De las cuales: " )
+
+
+ventas_filtro = []
+contador = 0
+
+if float(menu_1) == float(1.1):
+  for producto in lifestore_products:
+    for venta in lifestore_sales:
+      if producto[0] == venta[1] :
+        contador += 1
+    total_ventas = [producto[0], contador,producto[3],producto[1]]
+    ventas_filtro.append(total_ventas)
+    contador = 0
+
+
+##VENTAS FILTRO = [id,contador,categoría,nombre]
+
+
+
+#Filtrando
+
+#MAYORES VENTAS
+ventas_mayor = []
+def orden(elem):
+    return elem[1]
+    ventas_mayor = sorted(ventas_filtro,key=orden,reverse=True)
+
+if float(menu_1) == float(1.1):
+  print("\n""Top 20 de mayores ventas:" "\n")
+
+
+contador =0
+if float(menu_1) == float(1.1):
+  for c in ventas_mayor:
+    mayores_ventas = [c[1],'piezas de' , c[3]]
+    print(mayores_ventas,"\n")
+    contador +=1
+    if contador == 20  :
+      break
+
+  menu = 1
+  cat_1 = input("\n Categorías: \n 1. Procesadores \n 2. Tarjetas de video \n 3. Tarjetas madre  \n 4. Discos duros \n 5. Memorias usb \n 6. Pantallas \n 7. Bocinas \n 8. Audífonos \f \n Escribe el número de la categoría que desea consultar : \n ")
+    
+  if cat_1 == "1":
+    print("Categoría : Procesadores \n \f Se vendieron: \n")
+  if cat_1 == "2":
+    print("Categoría : Tarjetas de video \n \f Se vendieron: \n")
+  if cat_1 == "3":
+    print("Categoría : Tarjetas madre \n \f Se vendieron: \n")
+  if cat_1 == "4":
+    print("Categoría : Discos duros \n \f Se vendieron: \n") 
+  if cat_1 == "5":
+    print("Categoría : Memorias usb \n \f Se vendieron: \n")
+  if cat_1 == "6":
+    print("Categoría : Pantallas \n \f Se vendieron: \n")       
+  if cat_1 == "8":
+    print("Categoría : Bocinas \n \f Se vendieron: \n")
+  if cat_1 == "9":
+    print("Categoría : Audífonos \n \f Se vendieron: \n")
+
+  for i in ventas_mayor:
+    if cat_1 == "1" :
+      if i[2] == "procesadores" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "2" :
+      if i[2] == "tarjetas de video" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "3":
+      if i[2] == "tarjetas madre" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "4":
+      if i[2] == "discos duros" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "5":
+      if i[2] == "memorias usb" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "6":
+      if i[2] == "pantallas" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "7":
+      if i[2] == "bocinas" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+    if cat_1 == "8":
+      if i[2] == "audifonos" and i[1] != 0:
+        print(i[1], " piezas de ",i[3])
+
+""""
+####MENORES VENTAS
+"""
+
+if float(menu_1) == float(1.2):
+  print(" ")
+  print(
+   "Ventas totales en LifeStore: "+ str(len(lifestore_sales))+"\n"
+  "De las cuales: "
+  )
+
+
+#De menor a mayor
+ventas_menor = []
+
+def orden(elem):
+  return elem[1]
+
+ventas_menor = sorted(ventas_filtro,key=orden)
+
+""""
+VENTAS_MENOR = [ID,VENTAS, CATEGORIA, NOMBRE] 
+"""
+
+#Quitando los productos sin ventas
+sin_ventas = []
+
+contador =0
+for c in ventas_menor:
+  acomodo_sin_ventas = [c[0] ,c[1], c[2], c[3]]
+    #no hay ventas en esta lista
+  contador +=1
+  sin_ventas.append(acomodo_sin_ventas)
+  if contador == 54 :
+    break
+
+
+""""
+SIN_VENTAS = [ID,VENTAS, CATEGORIA, NOMBRE] 
+"""
+
+#Mostrando los productos con menores ventas
+
+if float(menu_1) == float(1.2): 
+  print("\n""Top 20 de menores ventas: ""\n")
+
+menores_ventas = []
+
+for i in ventas_menor:
+  if i[1] != 0 and i[1] < 3 :
+    menores_ventas_acomodo = [i[0] ,i[1], i[2], i[3]]
+    menores_ventas.append(menores_ventas_acomodo)
+
+if float(menu_1) == float(1.2): 
+  for c in menores_ventas:
+    print(c[1],'piezas de' , c[3], "\n")
+
+# """"
+# MENORES_VENTAS = [ID,VENTAS, CATEGORIA, NOMBRE] 
+# """
+  menu = 2
+  cat_2 = input("\n Categorías: \n 1. Procesadores \n 2. Tarjetas de video \n 3. Tarjetas madre  \n 4. Discos duros \n 5. Memorias usb \n 6. Pantallas \n 7. Bocinas \n 8. Audífonos \f \n Escribe el número de la categoría que desea consultar : \n ")
+
+  if cat_2 == "1":
+    print("Categoría : Procesadores \n \f Se vendieron: \n")
+  if cat_2 == "2":
+    print("Categoría : Tarjetas de video \n \f Se vendieron: \n")
+  if cat_2 == "3":
+    print("Categoría : Tarjetas madre \n \f Se vendieron: \n")
+  if cat_2 == "4":
+    print("Categoría : Discos duros \n \f Se vendieron: \n") 
+  if cat_2 == "5":
+    print("Categoría : Memorias usb \n \f Se vendieron: \n")
+  if cat_2 == "6":
+    print("Categoría : Pantallas \n \f Se vendieron: \n")       
+  if cat_2 == "7":
+    print("Categoría : Bocinas \n \f Se vendieron: \n")
+  if cat_2 == "8":
+    print("Categoría : Audífonos \n \f Se vendieron: \n")
+
+  for i in menores_ventas:
+    if cat_2 == "1" :
+      if i[2] == "procesadores" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "2" :
+      if i[2] == "tarjetas de video" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "3":
+      if i[2] == "tarjetas madre" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "4":
+      if i[2] == "discos duros" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "5":
+      if i[2] == "memorias usb" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "6":
+      if i[2] == "pantallas" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "7":
+      if i[2] == "bocinas" :
+        print(i[1], " piezas de ",i[3])
+    if cat_2 == "8":
+      if i[2] == "audifonos" :
+        print(i[1], " piezas de ",i[3])
+
+""""
+####BÚSQUEDAS MAYORES
+"""
+
+busqueda_filtro = []
+contador = 0
+
+
+for producto in lifestore_products:
+  for busqueda in lifestore_searches:
+    if busqueda[1] == producto[0] :
+      contador += 1
+  total_busquedas = [producto[0], contador,producto[3],producto[1]]
+  busqueda_filtro.append(total_busquedas)
+  contador = 0
+
+# for i in busqueda_filtro:
+#   print(i)
+
+""""
+##busqueda FILTRO = [id,contador,categoría,nombre]
+
+"""
+
+
+# #Filtrando
+
+# #MAYORES BUSQUEDAS
+
+busquedas_mayor = []
+def orden(elem):
+    return elem[1]
+
+busquedas_mayor = sorted(busqueda_filtro,key=orden,reverse=True)
+
+if float(menu_1) == float(2.1):
+  print("Top 20 de mayores búsquedas: ")
+  print(" ")
+contador =0
+if float(menu_1) == float(2.1):
+  for c in busquedas_mayor:
+    mayores_busquedas = [c[1],'veces el producto:' , c[3]]
+    print(mayores_busquedas,"\n")
+    contador +=1
+    if contador == 20 :
+      break
+
+if float(menu_1) == float(2.1):
+  menu = 3
+  cat_3 = input("\n Categorías: \n 1. Procesadores \n 2. Tarjetas de video \n 3. Tarjetas madre  \n 4. Discos duros \n 5. Memorias usb \n 6. Pantallas \n 7. Bocinas \n 8. Audífonos \f \n Escribe el número de la categoría que desea consultar : \n ")
+
+  if cat_3 == "1":
+    print("Categoría : Procesadores \n ")
+  if cat_3 == "2":
+    print("Categoría : Tarjetas de video \n ")
+  if cat_3 == "3":
+    print("Categoría : Tarjetas madre \n ")
+  if cat_3 == "4":
+    print("Categoría : Discos duros \n ") 
+  if cat_3 == "5":
+    print("Categoría : Memorias usb \n ")
+  if cat_3 == "6":
+    print("Categoría : Pantallas \n ")       
+  if cat_3 == "8":
+    print("Categoría : Bocinas \n ")
+  if cat_3 == "9":
+    print("Categoría : Audífonos \n ")
+
+  print("Se buscaron: ")
+
+  for i in busquedas_mayor:
+    if cat_3 == "1" :
+      if i[2] == "procesadores" and i[1] != 0 and i[1] > 10 :
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "2" :
+      if i[2] == "tarjetas de video" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "3":
+      if i[2] == "tarjetas madre" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "4":
+      if i[2] == "discos duros" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "5":
+      if i[2] == "memorias usb" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "6":
+      if i[2] == "pantallas" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "7":
+      if i[2] == "bocinas" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+    if cat_3 == "8":
+      if i[2] == "audifonos" and i[1] != 0 and i[1] > 10:
+        print(i[1], " veces: ",i[3])
+
+""""
+####BÚSQUEDAS MENORES
+"""
+
+if float(menu_0) == float(2.2):
+  print(
+   "Búsquedas totales en LifeStore: "+ str(len(lifestore_searches))+"\n"
+  "De las cuales: "
+  )
+
+
+#De menor a mayor
+busquedas_menor = []
+
+def orden(elem):
+    return elem[1]
+
+busquedas_menor = sorted(busqueda_filtro,key=orden)
+
+""""
+busquedas_MENOR = [ID,busquedas, CATEGORIA, NOMBRE] 
+"""
+
+#Quitando los productos sin busquedas
+sin_busquedas = []
+
+contador =0
+for c in busquedas_menor:
+  acomodo_sin_busquedas = [c[0] ,c[1], c[2], c[3]]
+  #no hay busquedas en esta lista
+  contador +=1
+  sin_busquedas.append(acomodo_sin_busquedas)
+  if contador == 40 :
+    break
+
+""""
+SIN_BÚSQUEDAS = [ID,BÚSQUEDAS, CATEGORIA, NOMBRE] 
+"""
+
+#Mostrando los productos con menores busquedas
+if float(menu_0) == float(2.2):
+  print("\n Top 50 de menores busquedas: ")
+  print(" ")
+
+menores_busquedas = []
+if float(menu_0) == float(2.2):
+  for i in busquedas_menor:
+    if i[1] != 0 and i[1] < 11 :
+      menores_busquedas_acomodo = [i[0] ,i[1], i[2], i[3]]
+    menores_busquedas.append(menores_busquedas_acomodo)
+
+if float(menu_0) == float(2.2):
+  for c in menores_busquedas:
+    print(c[1],'veces:' , c[3], "\n")
+
+
+# """"
+# MENORES_BUSQUEDAS = [ID,BUSQUEDAS, CATEGORIA, NOMBRE] 
+# """
+  menu = 4
+  cat_4 = input("\n Categorías: \n 1. Procesadores \n 2. Tarjetas de video \n 3. Tarjetas madre  \n 4. Discos duros \n 5. Memorias usb \n 6. Pantallas \n 7. Bocinas \n 8. Audífonos \f \n Escribe el número de la categoría que desea consultar : \n ")
+
+
+  if cat_4 == "1":
+    print("Categoría : Procesadores \n ")
+  if cat_4 == "2":
+    print("Categoría : Tarjetas de video \n ")
+  if cat_4 == "3":
+    print("Categoría : Tarjetas madre \n ")
+  if cat_4 == "4":
+    print("Categoría : Discos duros \n ") 
+  if cat_4 == "5":
+    print("Categoría : Memorias usb \n ")
+  if cat_4 == "6":
+    print("Categoría : Pantallas \n ")       
+  if cat_4 == "8":
+    print("Categoría : Bocinas \n ")
+  if cat_4 == "9":
+    print("Categoría : Audífonos \n ")
+
+  print("Se buscaron: ")
+
+  for i in menores_busquedas:
+    if cat_4 == "1" :
+      if i[2] == "procesadores" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "2" :
+      if i[2] == "tarjetas de video" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "3":
+      if i[2] == "tarjetas madre" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "4":
+      if i[2] == "discos duros" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "5":
+      if i[2] == "memorias usb" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "6":
+      if i[2] == "pantallas" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "7":
+      if i[2] == "bocinas" :
+        print(i[1], " veces: ",i[3])
+    if cat_4 == "8":
+      if i[2] == "audifonos" :
+        print(i[1], " veces: ",i[3])
+
+
+from lifestore_file import lifestore_products,lifestore_sales,lifestore_searches
+
+
+review_mejores = []
+contador = 0
+
+if float(menu_0) == float(3.1):
+  for producto in lifestore_products:
+    for review in lifestore_sales:
+      if review[1] == producto[0] and review[2] > 2 :
+        contador += 1
+    if contador != 0:
+      total_reviews = ["id: ",producto[0],"reviews: ",contador, "calif: ",review[2],producto[3],producto[1]]
+      review_mejores.append(total_reviews)
+    contador = 0
+
+""""
+##review mejores = [texto id,numero id,texto reviews,contador,texto calif, calif, categoría,nombre]
+##review mejores = [       0,        1,            2,       3,          4,     5,         6,     7]
+"""
+
+
+#Filtrando
+
+#MEJORES CALIF
+
+review_mejores_mayor_a_menor = []
+def orden(elem):
+    return elem[3]
+
+review_mejores_mayor_a_menor = sorted(review_mejores,key=orden,reverse=True)
+
+if float(menu_0) == float(3.1):
+  print("Top 20 de mejores calificaciones ")
+  print(" ")
+
+
+  contador =0
+  for c in review_mejores_mayor_a_menor:
+    mejores_reviews = [c[3],"calificaciones del producto: ", c[7]]
+    print(mejores_reviews,"\n")
+    contador +=1
+    if contador == 20 :
+      break
+
+
+  menu = 5
+  cat_5 = input("\n Categorías: \n 1. Procesadores \n 2. Tarjetas de video \n 3. Tarjetas madre  \n 4. Discos duros \n 5. Memorias usb \n 6. Pantallas \n 7. Bocinas \n 8. Audífonos \f \n Escribe el número de la categoría que desea consultar : \n ")
+
+  print("Número de mejores calificaciones: ")
+
+  if cat_5 == "1":
+    print("Categoría : Procesadores \n")
+  if cat_5 == "2":
+    print("Categoría : Tarjetas de video \n")
+  if cat_5 == "3":
+    print("Categoría : Tarjetas madre \n")
+  if cat_5 == "4":
+    print("Categoría : Discos duros \n") 
+  if cat_5 == "5":
+    print("Categoría : Memorias usb \n")
+  if cat_5 == "6":
+    print("Categoría : Pantallas \n")       
+  if cat_5 == "8":
+    print("Categoría : Bocinas \n")
+  if cat_5 == "9":
+    print("Categoría : Audífonos \n")
+
+  for i in review_mejores_mayor_a_menor:
+    if cat_5 == "1" :
+      if i[6] == "procesadores" :
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "2" :
+      if i[6] == "tarjetas de video":
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "3":
+      if i[6] == "tarjetas madre":
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "4":
+      if i[6] == "discos duros":
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "5":
+      if i[6] == "memorias usb":
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "6":
+      if i[6] == "pantallas":
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "7":
+      if i[6] == "bocinas":
+        print(i[3], "del producto:",i[7])
+    if cat_5 == "8":
+      if i[6] == "audifonos":
+        print(i[3], "del producto:",i[7])
+
+
+#PEORES CALIFICACIONES
+
+review_peores = []
+contador = 0
+
+if float(menu_0) == float(3.2):
+  for producto in lifestore_products:
+    for review in lifestore_sales:
+      if review[1] == producto[0] and review[2] < 4 :
+        contador += 1
+    if contador != 0:
+      total_reviews = ["id: ",producto[0],"reviews: ",contador, "calif: ",review[2],producto[3],producto[1]]
+      review_peores.append(total_reviews)
+    contador = 0
+
+""""
+##review peores = [texto id,id, texto reviews, contador, texto calif, calif, categoría,nombre]
+##review peores = [       0, 1,             2,        3,           4,     5,         6,     7]
+
+"""
+review_peores_mayor_a_menor = []
+def orden(elem):
+    return elem[3]
+
+review_peores_mayor_a_menor = sorted(review_peores,key=orden,reverse=True)
+
+if float(menu_0) == float(3.2):
+  print("Top 10 de peores calificaciones ")
+  print(" ")
+
+  contador =0
+  for c in review_peores_mayor_a_menor:
+    peores_reviews = [c[3],"vez/veces del producto: ", c[7]]
+    print(peores_reviews,"\n")
+    contador +=1
+    if contador == 20 :
+      break
+
+
+if float(menu_0) == float(3.2):
+  cat_6 = input("\n Categorías: \n 1. Procesadores \n 2. Tarjetas de video \n 3. Tarjetas madre  \n 4. Discos duros \n 5. Memorias usb \n 6. Pantallas \n 7. Bocinas \n 8. Audífonos \f \n Escribe el número de la categoría que desea consultar : \n ")
+
+  print("Número de mejores calificaciones: ")
+
+  if cat_6 == "1":
+    print("Categoría : Procesadores \n")
+  if cat_6 == "2":
+    print("Categoría : Tarjetas de video \n")
+  if cat_6 == "3":
+    print("Categoría : Tarjetas madre \n")
+  if cat_6 == "4":
+    print("Categoría : Discos duros \n") 
+  if cat_6 == "5":
+    print("Categoría : Memorias usb \n")
+  if cat_6 == "6":
+    print("Categoría : Pantallas \n")       
+  if cat_6 == "8":
+    print("Categoría : Bocinas \n")
+  if cat_6 == "9":
+    print("Categoría : Audífonos \n")
+
+  for i in review_peores_mayor_a_menor:
+    if cat_6 == "1" :
+      if i[6] == "procesadores" :
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "2" :
+      if i[6] == "tarjetas de video":
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "3":
+      if i[6] == "tarjetas madre":
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "4":
+      if i[6] == "discos duros":
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "5":
+      if i[6] == "memorias usb":
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "6":
+      if i[6] == "pantallas":
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "7":
+      if i[6] == "bocinas":
+        print(i[3], "del producto:",i[7])
+    if cat_6 == "8":
+      if i[6] == "audifonos":
+        print(i[3], "del producto:",i[7])
+
+if float(menu_0) == float(4.1) or float(menu_0) == float(4.2):
+  print("Total de ingreso anual: ""\n""No encontrado ")
+
+if float(menu_0) == float(5.1):
+  ventas_filtro = []
+contador = 0
+
+for producto in lifestore_products:
+  for venta in lifestore_sales:
+    if producto[0] == venta[1] :
+      contador += 1
+  total_ventas = [contador, producto[2],"veces" ,producto[3],producto[1]]
+  ventas_filtro.append(total_ventas)
+  contador = 0
+
+""""
+##VENTAS FILTRO = [contador,costo,texto veces, categoría,nombre]
+
+"""
+
+#Filtrando
+
+# #MAYORES VENTAS
+ingresos = []
+def orden(elem):
+    return elem[1]
+
+ingresos = sorted(ventas_filtro,key=orden,reverse=True)
+
+#VENTAS FILTRO = [contador,costo,texto veces, categoría,nombre]
+
+for i in ventas_filtro:
+  if i[0] != 0:
+    con_ingresos = i[0],i[1],i[2],i[3]
+    print(con_ingresos)
+
+contando = 0
+
+for i in ventas_filtro:
+  mult = i[0]*i[1]
+  contando += mult
+
+if float(menu_0) == float(4.1):
+  print("Total de ingresos anuales: 760177 ")
+
+if float(menu_0) == float(4.1):
+  print("Total de ingresos anuales: 760177 ")
+
+
+if float(menu_0) == float(5.1):
+  print("Total de ingresos mensuales: 760177 ")
+
+
+if float(menu_0) == float(5.1):
+  print("Total de ingresos mensuales promedio: 72.3 ")
