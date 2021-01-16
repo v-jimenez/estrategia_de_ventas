@@ -9,5 +9,11 @@ Análisis de ventas a partir de la clasificación de productos de acuerdo a tres
 -Número de compras
 
 
+Lenguaje utilizado:
+
+-Python
 
 
+IDE utilizado:
+
+-Spyder
